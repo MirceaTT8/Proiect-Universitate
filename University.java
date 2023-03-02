@@ -2,6 +2,7 @@ import java.util.Arrays;
 
 class Sala {
     String nume;
+    int asdasda;
     boolean[] interval=new boolean[24];
     public Sala(String nume)
     {
