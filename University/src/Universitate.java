@@ -1,19 +1,29 @@
 import java.util.Arrays;
-abstract class Sala {
-    String nume;
+class Sala {
+    private String nume;
+    private String tipulSalii;
+    private int locuri;
     boolean[] interval=new boolean[24];
-    public Sala(String nume)
+    public Sala(String nume,String tipulSalii)
     {
         this.nume=nume;
+        this.tipulSalii=tipulSalii;
+        if(tipulSalii.matches("Seminar"))
+            this.locuri=50;
+        if(tipulSalii.matches("Laborator"))
+            this.locuri=18;
+        if(tipulSalii.matches("Curs"))
+            this.locuri=120;
         Arrays.fill(interval, false);
     }
 
     public String toString()
     {
         StringBuilder s=new StringBuilder();
-        s.append("Numele: ").append(this.nume).append("\n");
+        s.append("Numele: ").append(this.nume).append("\n").append("Tipul Salii: ").append(tipulSalii).append("\n");
         for(int i = 0 ; i < 24 ; i++)
             s.append(interval[i]).append(" ").append(i).append("-").append(i+1).append("\n");
+        s.append("Nr locuri: ").append(this.locuri);
         return s.toString();
     }
 
@@ -49,7 +59,7 @@ abstract class Sala {
 }
 
 
-
+/*
 class Sala_Seminar extends Sala{
     private final int locuri;
     public Sala_Seminar(String nume)
@@ -62,6 +72,7 @@ class Sala_Seminar extends Sala{
         return "Tipul Salii: Seminar\n Cu locurile" + this.locuri + "\n" + super.toString();
     }
 }
+ */
 
 
 class Cladire{
@@ -89,7 +100,7 @@ class Cladire{
 
 public class Universitate {
     public static void main(String[] args) {
-        Sala_Seminar a1 = new Sala_Seminar("A101");
+        Sala a1 = new Sala("A101","Curs");
         System.out.println(a1);
         a1.ocupareSala(10, 13);
         Cladire c1=new Cladire("Cladirea Principala");
