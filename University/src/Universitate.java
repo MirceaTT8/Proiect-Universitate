@@ -1,5 +1,5 @@
 import java.util.Arrays;
-class Sala {
+abstract class Sala {
     String nume;
     boolean[] interval=new boolean[24];
     public Sala(String nume)
@@ -11,7 +11,7 @@ class Sala {
     public String toString()
     {
         StringBuilder s=new StringBuilder();
-        s.append("Numele: ").append("A101\n");
+        s.append("Numele: ").append(this.nume).append("\n");
         for(int i = 0 ; i < 24 ; i++)
             s.append(interval[i]).append(" ").append(i).append("-").append(i+1).append("\n");
         return s.toString();
@@ -49,19 +49,51 @@ class Sala {
 }
 
 
+
+class Sala_Seminar extends Sala{
+    private final int locuri;
+    public Sala_Seminar(String nume)
+    {
+        super(nume);
+        locuri = 50;
+    }
+    public String toString()
+    {
+        return "Tipul Salii: Seminar\n Cu locurile" + this.locuri + "\n" + super.toString();
+    }
+}
+
+
+class Cladire{
+    private String nume;
+    private Sala[] sali=new Sala[20];
+    private int c = 0;
+    public Cladire(String nume)
+    {
+        this.nume=nume;
+    }
+    public void adaugaSala(Sala a)
+    {
+        sali[c++]=a;
+    }
+    public String toString()
+    {
+        StringBuilder s = new StringBuilder();
+        s.append("Cladirea: ").append(this.nume).append(" Cu Sala/Salile:\n");
+        for(int i = 0 ; i < c ; i++)
+            s.append(sali[i]);
+        return s.toString();
+    }
+}
+
+
 public class Universitate {
     public static void main(String[] args) {
-        Sala a1 = new Sala("A101");
+        Sala_Seminar a1 = new Sala_Seminar("A101");
         System.out.println(a1);
-        a1.ocupareSala(0, 2);
-        System.out.println(a1);
-        a1.ocupareSala(8, 11);
-        System.out.println(a1);
-        a1.ocupareSala(8, 12);
-        System.out.println(a1);
-        a1.ocupareSala(19, 21);
-        System.out.println(a1);
-        a1.ocupareSala(15, 18);
-        System.out.println(a1);
+        a1.ocupareSala(10, 13);
+        Cladire c1=new Cladire("Cladirea Principala");
+        c1.adaugaSala(a1);
+        System.out.println(c1);
     }
 }
