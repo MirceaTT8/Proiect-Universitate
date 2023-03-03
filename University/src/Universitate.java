@@ -23,7 +23,7 @@ class Sala {
         s.append("Numele: ").append(this.nume).append("\n").append("Tipul Salii: ").append(tipulSalii).append("\n");
         for(int i = 0 ; i < 24 ; i++)
             s.append(interval[i]).append(" ").append(i).append("-").append(i+1).append("\n");
-        s.append("Nr locuri: ").append(this.locuri);
+        s.append("Nr locuri: ").append(this.locuri).append("\n");
         return s.toString();
     }
 
@@ -52,29 +52,11 @@ class Sala {
             }
         }
         else {
-            System.out.println("Sala nu se poate lua intre aceste ore!");
+            System.out.println("Sala nu se poate lua intre orele: " + inceput + " " + sfarsit);
         }
     }
 
 }
-
-
-/*
-class Sala_Seminar extends Sala{
-    private final int locuri;
-    public Sala_Seminar(String nume)
-    {
-        super(nume);
-        locuri = 50;
-    }
-    public String toString()
-    {
-        return "Tipul Salii: Seminar\n Cu locurile" + this.locuri + "\n" + super.toString();
-    }
-}
- */
-
-
 class Cladire{
     private String nume;
     private Sala[] sali=new Sala[20];
@@ -101,10 +83,21 @@ class Cladire{
 public class Universitate {
     public static void main(String[] args) {
         Sala a1 = new Sala("A101","Curs");
-        System.out.println(a1);
-        a1.ocupareSala(10, 13);
+        Sala a2 = new Sala("A109","Seminar");
+        Sala a3 = new Sala("ASPC","Curs");
+
+        a1.ocupareSala(10,13);
+        a2.ocupareSala(10,12);
+        a2.ocupareSala(20,23);//false
+        a3.ocupareSala(10,13);
+        a3.ocupareSala(13,16);
+        a3.ocupareSala(21,23);//false
+
         Cladire c1=new Cladire("Cladirea Principala");
         c1.adaugaSala(a1);
+        c1.adaugaSala(a2);
+        c1.adaugaSala(a3);
+
         System.out.println(c1);
     }
 }
